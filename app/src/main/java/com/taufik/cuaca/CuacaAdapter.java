@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -126,6 +128,25 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
         Date tanggalWaktuGmt = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return null;
+        try{
+            tanggalWaktuGmt = sdf.parse(tanggalWaktuGmt_string);
+        }
+        catch (ParseException e){
+            Log.e("*tw*", e.getMessage() );
+        }
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(tanggalWaktuGmt);
+        calendar.add(Calendar.HOUR_OF_DAY,7);
+
+        Date tanggalWaktuWib = calendar.getTime();
+
+        String tanggalWaktuWib_string = sdf.format(tanggalWaktuWib);
+        tanggalWaktuWib_string = tanggalWaktuWib_string.replace("00:00", "00 WIB");
+
+        Log.d("*tw*", "Tanggal Waktu Indonesia Barat : " + tanggalWaktuWib_string);
+
+        return tanggalWaktuWib_string;
     }
 }

@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView _recyclerView1;
     private RootModel _rootModel;
-    private TextView _totaltextView, _textViewCityInfo;
+    private TextView _totaltextView;
+    private TextView _textViewCityInfo;
     private SwipeRefreshLayout _swipeRefreshLayout1;
 
     @SuppressLint("MissingInflatedId")
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         _textViewCityInfo = findViewById(R.id.textView_cityInfo);
 
         initSwipeRefreshLayout();
-        bindRecyclerView();
+        bindRecyclerView1();
     }
 
     private void initSwipeRefreshLayout() {
@@ -47,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
         _swipeRefreshLayout1.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                bindRecyclerView();
+                bindRecyclerView1();
                 _swipeRefreshLayout1.setRefreshing(false);
             }
         });
     }
 
-    private void bindRecyclerView() {
+    private void bindRecyclerView1() {
         String url = "http://api.openweathermap.org/data/2.5/forecast?id=1630789&appid=4a7d57248f59c47f26c4c210c5643311";
         AsyncHttpClient ahc =   new AsyncHttpClient();
 
